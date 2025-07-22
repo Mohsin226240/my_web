@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mohsin Shahzad | Full Stack Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #00f2fe; /* Bright Cyan */
+            --secondary-color: #4facfe; /* Sky Blue */
+            --accent-color: #8a2be2; /* Blue Violet for contrast */
+            --dark-bg: #0a0a1a; /* Very Dark Blue */
+            --dark-surface: #15152a; /* Slightly lighter dark for elements */
+            --text-light: #e0e0e0; /* Off-white text */
+            --text-muted: #b0b0b0; /* Lighter grey for secondary text */
+            --form-border: rgba(0,242,254,0.3);
+            --form-focus-shadow: rgba(0, 242, 254, 0.4);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden; /* Prevents horizontal scroll from animations */
+            line-height: 1.7;
+        }
+
+        /* Animated Background Particles/Shapes */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,242,254,0.08) 0%, rgba(79,172,254,0.08) 50%, rgba(138,43,226,0.08) 100%);
+            z-index: -1;
+            animation: backgroundGradientShift 20s infinite alternate cubic-bezier(0.4, 0, 0.6, 1);
+            background-size: 200% 200%;
+        }
+
+        @keyframes backgroundGradientShift {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* For subtle animated shapes if desired, this can be expanded */
+        .shape-animation {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            animation: floatAndFade 20s infinite ease-in-out;
+            pointer-events: none;
+        }
+        .shape-animation:nth-child(1) { width: 60px; height: 60px; top: 10%; left: 5%; animation-delay: 0s; opacity: 0.7; }
+        .shape-animation:nth-child(2) { width: 90px; height: 90px; top: 70%; left: 80%; animation-delay: 5s; opacity: 0.5; }
+        .shape-animation:nth-child(3) { width: 40px; height: 40px; top: 40%; left: 30%; animation-delay: 10s; opacity: 0.8; }
+        .shape-animation:nth-child(4) { width: 70px; height: 70px; top: 20%; left: 90%; animation-delay: 15s; opacity: 0.6; }
+        .shape-animation:nth-child(5) { width: 50px; height: 50px; top: 90%; left: 10%; animation-delay: 20s; opacity: 0.4; }
+
+        @keyframes floatAndFade {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 0.3; }
+        }
+
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--dark-surface);
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
+            transition: background-color 0.4s ease;
+            backdrop-filter: blur(8px); /* Glassmorphism effect */
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(21, 21, 42, 0.9); /* More opaque on scroll */
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color) !important;
+            font-weight: 700;
+            font-size: 2rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            text-shadow: 0 0 10px rgba(0,242,254,0.5);
+        }
+        .navbar-brand::after {
+            content: '.';
+            color: var(--accent-color);
+        }
+        .navbar-brand:hover {
+            transform: scale(1.05) rotate(2deg);
+            color: var(--secondary-color) !important;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            transition: color 0.3s, transform 0.3s;
+            position: relative;
+            padding: 10px 15px !important;
+            font-weight: 500;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 5px; /* Adjust to sit above padding */
+            left: 50%;
+            transform: translateX(-50%) scaleX(0); /* Start scaled to 0 */
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation */
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: translateX(-50%) scaleX(1); /* Expand on hover/active */
+        }
+        .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+
+        .navbar-toggler {
+            border: 1px solid var(--primary-color) !important;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 242, 254, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, #667eea, #764ba2); /* Original gradient for hero */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            animation: textGlow 2s infinite alternate, fadeInDown 1.2s ease-out;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.7);
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color); }
+            100% { text-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--secondary-color); }
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            animation: fadeInUp 1.5s ease-out;
+            margin-top: 20px;
+            font-weight: 300;
+        }
+
+        .hero .social-icons a {
+            color: white;
+            font-size: 2.2rem;
+            margin: 0 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy effect */
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .hero .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-8px) scale(1.2) rotate(5deg);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--secondary-color);
+        }
+
+        .btn-animate {
+            background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 14px 40px;
+            font-weight: bold;
+            color: var(--dark-bg);
+            border-radius: 50px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother animation */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .btn-animate::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .btn-animate:hover::before {
+            left: 100%;
+        }
+
+        .btn-animate:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+            color: white; /* Text color changes to white on hover */
+            background: linear-gradient(45deg, var(--accent-color) 0%, var(--primary-color) 100%);
+        }
+
+        .btn-outline-light-custom {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .btn-outline-light-custom:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(0,242,254,0.4);
+        }
+
+
+        /* General Section Styling */
+        section {
+            padding: 100px 0;
+            background-color: var(--dark-surface);
+            margin-top: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        section:nth-of-type(even) {
+            background-color: var(--dark-bg);
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            text-shadow: 0 0 15px rgba(0,242,254,0.3);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 0;
+            width: 100px;
+            height: 5px;
+            background-color: var(--accent-color);
+            border-radius: 3px;
+            animation: underlinePulse 2s infinite alternate;
+        }
+
+        @keyframes underlinePulse {
+            0% { transform: translateX(-50%) scaleX(0.8); opacity: 0.8; }
+            100% { transform: translateX(-50%) scaleX(1); opacity: 1; }
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about-img {
+            max-width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bounce effect */
+            border: 3px solid var(--primary-color);
+        }
+
+        .about-img:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .about-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .about-content p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Skills Section */
+        .skills-list ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skills-list li {
+            background-color: var(--secondary-color);
+            color: var(--dark-bg);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            cursor: default;
+        }
+
+        .skills-list li:hover {
+            transform: translateY(-5px) scale(1.05);
+            background-color: var(--accent-color);
+            color: white;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Projects Section */
+        .card {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            border: none;
+            border-radius: 15px;
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border-color: var(--primary-color); /* Subtle border on hover */
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .icon-box {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            transition: transform 0.4s ease, color 0.4s ease;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--primary-color);
+        }
+
+        .project-link {
+            position: absolute;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            text-decoration: none;
+            opacity: 0;
+            transition: all 0.4s ease-in-out;
+            font-weight: 600;
+        }
+
+        .card:hover .project-link {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .project-link i {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+        .project-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Services Section */
+        .service-card {
+            background-color: var(--dark-bg);
+            border-radius: 15px;
+            padding: 35px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            height: 100%; /* Ensure cards are same height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            background-color: var(--dark-surface); /* Slightly change bg on hover */
+        }
+
+        .service-card .icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .icon {
+            color: var(--accent-color);
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        .service-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-light);
+            font-size: 2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Testimonials Section */
+        .testimonial-card {
+            background-color: var(--dark-bg);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            color: var(--text-light);
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .testimonial-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0,242,254,0.3);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .testimonial-card h5 {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .testimonial-card span {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        .carousel-indicators [data-bs-target] {
+            background-color: var(--primary-color);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+        .carousel-indicators .active {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-image: none;
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+        .carousel-control-prev-icon::after { content: '\f053'; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--primary-color); font-size: 1.5rem; }
+        .carousel-control-next-icon::after { content: '\f054'; font-family: "Font Awesome 6 Free"; font-weight: 900; color: var(--primary-color); font-size: 1.5rem; }
+        .carousel-control-prev-icon:hover, .carousel-control-next-icon:hover {
+            background-color: var(--primary-color);
+            color: var(--dark-bg);
+            opacity: 1;
+        }
+        .carousel-control-prev-icon:hover::after, .carousel-control-next-icon:hover::after {
+            color: var(--dark-bg);
+        }
+
+
+        /* Contact Section - Advanced Form */
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info p:hover {
+            color: var(--primary-color);
+            transform: translateX(10px);
+        }
+
+        .contact-info i {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-right: 20px;
+            width: 35px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .contact-info p:hover i {
+            transform: scale(1.1);
+        }
+
+        .contact-info .social-icons a {
+            font-size: 2rem;
+            margin: 0 15px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            text-shadow: 0 0 8px rgba(255,255,255,0.2);
+        }
+        .contact-info .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 15px var(--primary-color), 0 0 25px var(--secondary-color);
+        }
+
+        .contact-form .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .contact-form .form-control {
+            background-color: var(--dark-bg);
+            border: 1px solid var(--form-border);
+            color: var(--text-light);
+            padding: 15px 20px;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem var(--form-focus-shadow);
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+        }
+
+        .contact-form .form-control::placeholder {
+            color: var(--text-muted);
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-form .form-control:focus::placeholder {
+            opacity: 0; /* Hide placeholder on focus */
+        }
+
+        .contact-form label.form-label-floating {
+            position: absolute;
+            top: 15px;
+            left: 20px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            pointer-events: none;
+            transition: all 0.3s ease;
+            background-color: transparent;
+            padding: 0 5px;
+            transform-origin: left top;
+            z-index: 2;
+        }
+
+        .contact-form .form-control:focus + label.form-label-floating,
+        .contact-form .form-control:not(:placeholder-shown) + label.form-label-floating {
+            top: -12px;
+            left: 15px;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            background-color: var(--dark-surface); /* Background for the floating label */
+            padding: 0 8px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .contact-form textarea {
+            min-height: 180px;
+            resize: vertical;
+        }
+        .contact-form .btn-animate {
+            width: 100%;
+            max-width: 300px;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            padding: 15px 0;
+        }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-surface);
+            color: var(--text-muted);
+            padding: 50px 0 30px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+            border-radius: 15px 15px 0 0;
+        }
+
+        footer .social-links a {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px rgba(255,255,255,0.1);
+        }
+
+        footer .social-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--secondary-color);
+        }
+
+        footer p {
+            margin-top: 25px;
+            font-size: 0.95rem;
+            color: rgba(224, 224, 224, 0.6);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            .hero p {
+                font-size: 1.3rem;
+            }
+            .section-title {
+                font-size: 2.8rem;
+            }
+            .about-content h3 {
+                font-size: 2rem;
+            }
+            .card-title {
+                font-size: 1.5rem;
+            }
+            .service-card h4 {
+                font-size: 1.6rem;
+            }
+            .testimonial-card p {
+                font-size: 1rem;
+            }
+            .contact-info p {
+                font-size: 1.1rem;
+            }
+            .contact-info i {
+                font-size: 1.5rem;
+            }
+            .contact-form .btn-animate {
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 15px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .hero .social-icons a {
+                font-size: 1.6rem;
+                margin: 0 10px;
+            }
+            .btn-animate {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+            section {
+                padding: 60px 0;
+                margin-top: 20px;
+            }
+            .about-content {
+                text-align: center !important;
+                margin-top: 30px;
+            }
+            .about-img {
+                margin-bottom: 30px;
+            }
+            .contact-info p {
+                justify-content: flex-start; /* Align contact info to left on smaller screens */
+            }
+            .contact-info .social-icons {
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="shape-animation"></div>
+    <div class="shape-animation"></div>
+    <div class="shape-animation"></div>
+    <div class="shape-animation"></div>
+    <div class="shape-animation"></div>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">Portfolio</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section id="home" class="hero">
+    <div class="container">
+        <h1 data-aos="fade-up" data-aos-duration="1500">Hi, I'm <span style="color: var(--primary-color);">Mohsin Shahzad</span></h1>
+        <p data-aos="fade-up" data-aos-delay="400" data-aos-duration="1500">A passionate Python Developer & Django Specialist crafting seamless web experiences.</p>
+        <div class="mt-5" data-aos="fade-up" data-aos-delay="800" data-aos-duration="1500">
+            <a href="#projects" class="btn btn-animate me-3">View My Work <i class="fas fa-arrow-right ms-2"></i></a>
+            <a href="#contact" class="btn btn-animate btn-outline-light-custom">Get in Touch <i class="fas fa-paper-plane ms-2"></i></a>
+        </div>
+        <div class="social-icons mt-5" data-aos="zoom-in" data-aos-delay="1200" data-aos-duration="1500">
+            <a href="https://github.com/Mohsin226240" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/mohsin-shahzad-504447354/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/i_am_Mohsin7" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="https://wa.me/***********" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="about" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">About Me</h2>
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0" data-aos="fade-right" data-aos-delay="200">
+                <img src="Pic.jpg" class="img-fluid about-img" alt="Mohsin's Profile Picture">
+            </div>
+            <div class="col-lg-6 text-start about-content" data-aos="fade-left" data-aos-delay="400">
+                <h3>Hello there! <span class="wave-emoji" style="display: inline-block; animation: wave 2s infinite;">👋</span></h3>
+                <p>I'm Mohsin Shahzad, a passionate Full Stack Developer with a knack for building robust and user-centric web applications. Based in the vibrant city of Lahore, Pakistan, my journey in the tech world is driven by a profound curiosity to solve complex problems and create impactful digital experiences.</p>
+                <p>My core expertise lies in Python and the powerful Django framework, where I architect scalable and secure backend systems. On the frontend, I meticulously craft engaging user interfaces using HTML5, CSS3, JavaScript, and modern libraries/frameworks like Bootstrap. My goal is always to deliver solutions that are not only highly functional but also a delight to interact with.</p>
+                <p>I believe in clean code, continuous learning, and fostering collaborative environments. Whether it's developing intricate APIs or optimizing database queries, I'm committed to delivering excellence. Let's build something amazing together!</p>
+                <a href="#contact" class="btn btn-animate mt-4" data-aos="zoom-in" data-aos-delay="600">Let's Discuss Your Project <i class="fas fa-handshake ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="skills" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">My Skills & Expertise</h2>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">A comprehensive look at the technologies and tools I master.</p>
+
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="card p-4 h-100">
+                    <i class="fas fa-cogs icon-box mb-3"></i>
+                    <h5 class="card-title">Backend Development</h5>
+                    <div class="skills-list">
+                        <ul>
+                            <li>Python</li>
+                            <li>Django</li>
+                            <li>Django REST Framework</li>
+                            <li>SQL (MySQL)</li>
+                            <li>RESTful APIs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="card p-4 h-100">
+                    <i class="fas fa-desktop icon-box mb-3"></i>
+                    <h5 class="card-title">Frontend Development</h5>
+                    <div class="skills-list">
+                        <ul>
+                            <li>HTML5, CSS3</li>
+                            <li>JavaScript (ES6+)</li>
+                            <li>Bootstrap 5</li>
+                            <li>jQuery</li>
+                            <li>Responsive Design</li>
+                            <li>Sass/Less</li>
+                            <li>Web Animations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in-up" data-aos-delay="400">
+                <div class="card p-4 h-100">
+                    <i class="fas fa-terminal icon-box mb-3"></i>
+                    <h5 class="card-title">DevOps & Tools</h5>
+                    <div class="skills-list">
+                        <ul>
+                            <li>Git & GitHub</li>
+                             <li>VS Code</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="services" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">My Services</h2>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">Delivering a spectrum of professional development services.</p>
+
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="service-card">
+                    <i class="fas fa-server icon"></i>
+                    <h4>Backend Development</h4>
+                    <p>Crafting robust, scalable, Desktop Applications, Softwares and secure backend APIs and systems with Python and Django, ensuring high performance.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="service-card">
+                    <i class="fas fa-paint-brush icon"></i>
+                    <h4>Frontend & UI/UX</h4>
+                    <p>Designing intuitive and visually appealing user interfaces for exceptional user experience.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="400">
+                <div class="service-card">
+                    <i class="fas fa-laptop-code icon"></i>
+                    <h4>Full Stack Development</h4>
+                    <p>End-to-end development of dynamic web applications, handling both server-side logic and client-side interactions.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="500">
+                <div class="service-card">
+                    <i class="fas fa-mobile-alt icon"></i>
+                    <h4>Mobile-Responsive Design</h4>
+                    <p>Ensuring your website or application looks and functions perfectly on desktops, tablets, and smartphones.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="600">
+                <div class="service-card">
+                    <i class="fas fa-database icon"></i>
+                    <h4>Database Management</h4>
+                    <p>Efficient design, optimization, and management of databases (MySQL) for data integrity and speed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="projects" class="py-5">
+    <div class="container">
+        <h2 class="section-title text-center" data-aos="fade-up">My Creative Projects</h2>
+        <p class="lead mb-5 text-center" data-aos="fade-up" data-aos-delay="100">A glimpse into my diverse portfolio, showcasing my skills in action.</p>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-car icon-box mb-2"></i>
+                    <h5 class="card-title">Car Rental System</h5>
+                    <p class="card-text">A robust car rental system offering seamless car rental services. Features secure user authentication, real-time vehicle availability, integrated payment gateway, and a comprehensive admin dashboard for managing bookings and fleet. Designed for scalability and ease of use.</p>
+                    <a href="https://github.com/Mohsin226240/Car-Rental-System" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-robot icon-box mb-2"></i>
+                    <h5 class="card-title">AI Chatbot Service (Gemini API)</h5>
+                    <p class="card-text">🤖 AI Chatbot using Gemini API (Google Generative AI)
+This project is a smart AI-powered chatbot built using Python and the Gemini API (Google Generative AI). It provides human-like responses and supports voice output using pyttsx3.</p>
+                    <a href="https://github.com/Mohsin226240/AI-Chatbot-Project" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-globe icon-box mb-2"></i>
+                    <h5 class="card-title">Dynamic Portfolio Website</h5>
+                    <p class="card-text">You're looking at it! A fully responsive and animated portfolio website developed with "Bootstrap 5", custom CSS for intricate hover effects and animations, and "AOS" for on-scroll reveals. Designed to highlight skills and projects in an engaging, modern interface.</p>
+                    <a href="https://github.com/Mohsin226240/My-Portfolio-Website" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-calculator icon-box mb-2"></i>
+                    <h5 class="card-title">Advanced Desktop Calculator</h5>
+                    <p class="card-text">A feature-rich desktop calculator application developed using Python's "Tkinter GUI library". Supports standard arithmetic operations, complex calculations, and includes error handling for invalid inputs. Provides a clean and intuitive user experience.</p>
+                    <a href="https://github.com/Mohsin226240/Calculator-with-History-Feature" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-book-open icon-box mb-2"></i>
+                    <h5 class="card-title">Smart Notepad Application</h5>
+                    <p class="card-text">A versatile desktop notepad built in "Python", Users can create, open, save and load text files.A practical tool for daily note-taking.</p>
+                    <a href="https://github.com/Mohsin226240/Notepad-App" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="700">
+                <div class="card p-3 text-center h-100">
+                    <i class="fa-solid fa-file-invoice icon-box mb-2"></i>
+                    <h5 class="card-title">ATS Resume Analyzer Web Server</h5>
+                    <p class="card-text">An Applicant Tracking System (ATS) web application for resume optimization. Users upload resumes, which are then analyzed for keywords and scored against job descriptions, helping job seekers tailor their applications. Developed with **Flask/Django** and text processing libraries.</p>
+                    <a href="https://github.com/Mohsin226240/ATS-Resume-Analyzer" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5" data-aos="zoom-in" data-aos-delay="800">
+            <a href="https://github.com/Mohsin226240?tab=repositories" target="_blank" class="btn btn-animate">Explore More on GitHub <i class="fab fa-github ms-2"></i></a>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="testimonials" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">What Clients Say About Me</h2>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">Hear directly from those I've collaborated with.</p>
+
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up" data-aos-delay="200">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner pb-5">
+                <div class="carousel-item active">
+                    <div class="testimonial-card col-md-10 col-lg-8">
+                        <img src="https://img.freepik.com/premium-photo/indian-man-suit-standing-office-ai-generated_843560-1342.jpg" alt="Ahmad Khan">
+                        <p class="mb-4">"Mohsin's expertise in Django development is unparalleled. He not only delivered a complex application on time but also provided invaluable insights that significantly improved our product. A true professional and a pleasure to work with!"</p>
+                        <h5>Ahmad Khan</h5>
+                        <span>CEO, Tech Solutions Inc.</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card col-md-10 col-lg-8">
+                        <img src="https://img.freepik.com/premium-photo/indian-pretty-girl-standing-position-news-reporter-office-girl_924463-95.jpg" alt="Sara Ali">
+                        <p class="mb-4">"We hired Mohsin for our frontend redesign, and the results were stunning! His attention to UI/UX details and ability to create a visually appealing yet highly functional interface exceeded our expectations. Highly recommend his services."</p>
+                        <h5>Sara Ali</h5>
+                        <span>Project Manager, Global Innovations</span>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="testimonial-card col-md-10 col-lg-8">
+                        <img src="https://img.freepik.com/free-photo/writing-down-plan_1098-15897.jpg?semt=ais_hybrid&w=740" alt="Usman Tariq">
+                        <p class="mb-4">"Mohsin transformed our legacy system into a modern, scalable web application. His problem-solving skills and dedication to quality code are top-notch. He's an asset to any team and I look forward to our next collaboration."</p>
+                        <h5>Usman Tariq</h5>
+                        <span>CTO, Creative Studio</span>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+---
+
+<section id="contact" class="py-5">
+    <div class="container text-center">
+        <h2 class="section-title" data-aos="fade-up">Let's Connect</h2>
+        <p class="lead mb-5" data-aos="fade-up" data-aos-delay="100">Whether you have a project, a question, or just want to say hello, I'm here!</p>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="contact-info mb-5" data-aos="fade-up" data-aos-delay="200">
+                    <p><i class="fa-solid fa-envelope me-2"></i> <a href="mailto:mohsin.ayaz.dev@example.com" style="color: var(--text-light); text-decoration: none;">mohsin226240@gmail.com</a></p>
+                    <p><i class="fa-solid fa-phone me-2"></i> <a href="tel:+923001234567" style="color: var(--text-light); text-decoration: none;">+92-3238522049</a></p>
+                    <p><i class="fa-solid fa-map-marker-alt me-2"></i> Faisalabad, Punjab, Pakistan</p>
+                    <div class="social-icons mt-4">
+                        <a href="https://github.com/yourusername" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://twitter.com/yourusername" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://wa.me/923001234567" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+               <form class="contact-form" data-aos="fade-up" data-aos-delay="400" action="https://formspree.io/f/xkgzoyga" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="nameInput" placeholder=" " required **name="name"**>
+                                <label for="nameInput" class="form-label-floating">Your Name</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="emailInput" placeholder=" " required **name="email"**>
+                                <label for="emailInput" class="form-label-floating">Your Email</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="subjectInput" placeholder=" " required **name="_subject"**>
+                        <label for="subjectInput" class="form-label-floating">Subject</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" id="messageTextarea" placeholder=" " rows="6" required **name="message"**></textarea>
+                        <label for="messageTextarea" class="form-label-floating">Your Message</label>
+                    </div>
+                    <button type="submit" class="btn btn-animate">Send Message <i class="fas fa-paper-plane ms-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+---
+
+<footer>
+    <div class="container">
+        <div class="social-links mb-3">
+            <a href="https://github.com/Mohsin226240" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/mohsin-shahzad-504447354/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://x.com/i_am_Mohsin7" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="mailto:mohsin226240@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; <span id="current-year"></span> Mohsin Shahzad. All Rights Reserved. Crafted with <i class="fas fa-heart" style="color: red;"></i> in Faisalabad.</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1200, // Longer animation duration
+        once: true,    // Animate only once per element
+        mirror: false, // Do not repeat animation on scroll up
+        easing: 'ease-out-cubic', // Smoother easing function
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 80) { // Increased scroll threshold
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Active nav link on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const navbar = document.querySelector('.navbar');
+
+        const updateActiveLink = () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - navbar.offsetHeight - 50; // Adjust for sticky nav and padding
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.href.includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        // Initial check
+        updateActiveLink();
+
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveLink);
+    });
+
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Wave emoji animation (for About Me)
+    const waveEmoji = document.querySelector('.wave-emoji');
+    if (waveEmoji) {
+        waveEmoji.addEventListener('animationiteration', () => {
+            waveEmoji.style.animation = 'none'; // Stop after one iteration
+            setTimeout(() => {
+                waveEmoji.style.animation = 'wave 2s infinite'; // Restart
+            }, 5000); // Wait 5 seconds before next wave
+        });
+    }
+
+    // Contact Form Floating Labels (JavaScript for Bootstrap 5)
+    // This makes the placeholder act as a label
+    document.querySelectorAll('.form-group .form-control').forEach(input => {
+        // Add a dummy placeholder so :not(:placeholder-shown) works immediately
+        if (!input.placeholder) {
+            input.placeholder = " ";
+        }
+        // Create the label if it doesn't exist
+        if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('form-label-floating')) {
+            const label = document.createElement('label');
+            label.setAttribute('for', input.id);
+            label.classList.add('form-label-floating');
+            // Get text from original placeholder or use ID
+            const labelText = input.id.replace('Input', '').replace('Textarea', '').replace(/([A-Z])/g, ' $1').trim();
+            label.textContent = labelText.charAt(0).toUpperCase() + labelText.slice(1);
+            input.parentNode.insertBefore(label, input.nextSibling);
+        }
+    });
+
+    // Handle form submission (Example - replace with actual backend logic)
+    document.querySelector('.contact-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // You would typically send this data to a backend server using fetch API or XMLHttpRequest
+        const formData = new FormData(this);
+        const name = document.getElementById('nameInput').value;
+        const email = document.getElementById('emailInput').value;
+        const subject = document.getElementById('subjectInput').value;
+        const message = document.getElementById('messageTextarea').value;
+
+        // Simple client-side validation example
+        if (name && email && subject && message) {
+            alert('Thank you, ' + name + '! Your message has been sent. I will get back to you soon.');
+            this.reset(); // Clear the form
+            // Here you'd typically send data to a server:
+            // fetch('your-form-submission-endpoint', {
+            //     method: 'POST',
+            //     body: formData
+            // })
+            // .then(response => response.json())
+            // .then(data => console.log(data))
+            // .catch(error => console.error('Error:', error));
+        } else {
+            alert('Please fill out all fields.');
+        }
+    });
+</script>
+</body>
+</html>
