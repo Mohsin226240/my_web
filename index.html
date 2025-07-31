@@ -10,13 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #00f2fe; /* Bright Cyan */
-            --secondary-color: #4facfe; /* Sky Blue */
-            --accent-color: #8a2be2; /* Blue Violet for contrast */
-            --dark-bg: #0a0a1a; /* Very Dark Blue */
-            --dark-surface: #15152a; /* Slightly lighter dark for elements */
-            --text-light: #e0e0e0; /* Off-white text */
-            --text-muted: #b0b0b0; /* Lighter grey for secondary text */
+            --primary-color: #00f2fe; 
+            --secondary-color: #4facfe;
+            --accent-color: #8a2be2; 
+            --dark-bg: #0a0a1a; 
+            --dark-surface: #15152a;
+            --text-light: #e0e0e0;
+            --text-muted: #b0b0b0;
             --form-border: rgba(0,242,254,0.3);
             --form-focus-shadow: rgba(0, 242, 254, 0.4);
         }
@@ -26,11 +26,9 @@
             scroll-behavior: smooth;
             background-color: var(--dark-bg);
             color: var(--text-light);
-            overflow-x: hidden; /* Prevents horizontal scroll from animations */
+            overflow-x: hidden; 
             line-height: 1.7;
         }
-
-        /* Animated Background Particles/Shapes */
         body::before {
             content: '';
             position: fixed;
@@ -74,12 +72,12 @@
             background-color: var(--dark-surface);
             box-shadow: 0 3px 15px rgba(0, 0, 0, 0.6);
             transition: background-color 0.4s ease;
-            backdrop-filter: blur(8px); /* Glassmorphism effect */
+            backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
         }
 
         .navbar.scrolled {
-            background-color: rgba(21, 21, 42, 0.9); /* More opaque on scroll */
+            background-color: rgba(21, 21, 42, 0.9); 
         }
 
         .navbar-brand {
@@ -112,13 +110,13 @@
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 5px; /* Adjust to sit above padding */
+            bottom: 5px;
             left: 50%;
-            transform: translateX(-50%) scaleX(0); /* Start scaled to 0 */
+            transform: translateX(-50%) scaleX(0); 
             width: 100%;
             height: 2px;
             background-color: var(--primary-color);
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth animation */
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
 
         .nav-link:hover {
@@ -127,7 +125,7 @@
         }
 
         .nav-link:hover::after, .nav-link.active::after {
-            transform: translateX(-50%) scaleX(1); /* Expand on hover/active */
+            transform: translateX(-50%) scaleX(1);
         }
         .nav-link.active {
             color: var(--primary-color) !important;
@@ -145,7 +143,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(to right, #667eea, #764ba2); /* Original gradient for hero */
+            background: linear-gradient(to right, #667eea, #764ba2); ]
             color: white;
             display: flex;
             justify-content: center;
@@ -185,7 +183,7 @@
             color: white;
             font-size: 2.2rem;
             margin: 0 20px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Springy effect */
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             text-shadow: 0 0 10px rgba(255,255,255,0.3);
         }
 
@@ -202,7 +200,7 @@
             font-weight: bold;
             color: var(--dark-bg);
             border-radius: 50px;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); /* Smoother animation */
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); 
             box-shadow: 0 6px 20px rgba(0,0,0,0.5);
             letter-spacing: 0.8px;
             text-transform: uppercase;
@@ -231,7 +229,7 @@
         .btn-animate:hover {
             transform: scale(1.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.7);
-            color: white; /* Text color changes to white on hover */
+            color: white; 
             background: linear-gradient(45deg, var(--accent-color) 0%, var(--primary-color) 100%);
         }
 
@@ -249,8 +247,6 @@
             box-shadow: 0 6px 20px rgba(0,242,254,0.4);
         }
 
-
-        /* General Section Styling */
         section {
             padding: 100px 0;
             background-color: var(--dark-surface);
@@ -306,7 +302,7 @@
             max-width: 100%;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bounce effect */
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
             border: 3px solid var(--primary-color);
         }
 
@@ -1127,23 +1123,19 @@ This project is a smart AI-powered chatbot built using Python and the Gemini API
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({
-        duration: 1200, // Longer animation duration
-        once: true,    // Animate only once per element
-        mirror: false, // Do not repeat animation on scroll up
-        easing: 'ease-out-cubic', // Smoother easing function
+        duration: 1200,
+        once: true,    
+        mirror: false, 
+        easing: 'ease-out-cubic', 
     });
-
-    // Navbar scroll effect
     window.addEventListener('scroll', function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 80) { // Increased scroll threshold
+        if (window.scrollY > 80) { 
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
     });
-
-    // Active nav link on scroll
     document.addEventListener('DOMContentLoaded', () => {
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -1152,7 +1144,7 @@ This project is a smart AI-powered chatbot built using Python and the Gemini API
         const updateActiveLink = () => {
             let current = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - navbar.offsetHeight - 50; // Adjust for sticky nav and padding
+                const sectionTop = section.offsetTop - navbar.offsetHeight - 50; 
                 const sectionHeight = section.clientHeight;
                 if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
                     current = section.getAttribute('id');
@@ -1166,70 +1158,42 @@ This project is a smart AI-powered chatbot built using Python and the Gemini API
                 }
             });
         };
-
-        // Initial check
         updateActiveLink();
-
-        // Update on scroll
         window.addEventListener('scroll', updateActiveLink);
     });
-
-    // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
-
-    // Wave emoji animation (for About Me)
     const waveEmoji = document.querySelector('.wave-emoji');
     if (waveEmoji) {
         waveEmoji.addEventListener('animationiteration', () => {
-            waveEmoji.style.animation = 'none'; // Stop after one iteration
+            waveEmoji.style.animation = 'none';
             setTimeout(() => {
-                waveEmoji.style.animation = 'wave 2s infinite'; // Restart
-            }, 5000); // Wait 5 seconds before next wave
+                waveEmoji.style.animation = 'wave 2s infinite';
+            }, 5000);
         });
     }
-
-    // Contact Form Floating Labels (JavaScript for Bootstrap 5)
-    // This makes the placeholder act as a label
     document.querySelectorAll('.form-group .form-control').forEach(input => {
-        // Add a dummy placeholder so :not(:placeholder-shown) works immediately
         if (!input.placeholder) {
             input.placeholder = " ";
         }
-        // Create the label if it doesn't exist
         if (!input.nextElementSibling || !input.nextElementSibling.classList.contains('form-label-floating')) {
             const label = document.createElement('label');
             label.setAttribute('for', input.id);
             label.classList.add('form-label-floating');
-            // Get text from original placeholder or use ID
             const labelText = input.id.replace('Input', '').replace('Textarea', '').replace(/([A-Z])/g, ' $1').trim();
             label.textContent = labelText.charAt(0).toUpperCase() + labelText.slice(1);
             input.parentNode.insertBefore(label, input.nextSibling);
         }
     });
-
-    // Handle form submission (Example - replace with actual backend logic)
     document.querySelector('.contact-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // You would typically send this data to a backend server using fetch API or XMLHttpRequest
+        event.preventDefault();
         const formData = new FormData(this);
         const name = document.getElementById('nameInput').value;
         const email = document.getElementById('emailInput').value;
         const subject = document.getElementById('subjectInput').value;
         const message = document.getElementById('messageTextarea').value;
-
-        // Simple client-side validation example
         if (name && email && subject && message) {
             alert('Thank you, ' + name + '! Your message has been sent. I will get back to you soon.');
-            this.reset(); // Clear the form
-            // Here you'd typically send data to a server:
-            // fetch('your-form-submission-endpoint', {
-            //     method: 'POST',
-            //     body: formData
-            // })
-            // .then(response => response.json())
-            // .then(data => console.log(data))
-            // .catch(error => console.error('Error:', error));
+            this.reset();
         } else {
             alert('Please fill out all fields.');
         }
