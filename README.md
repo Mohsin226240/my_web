@@ -6,8 +6,6 @@ This is a fully responsive and modern personal portfolio website built using HTM
 
 🧠 Detailed Skills and Projects sections
 
-🌙 Dark/Light theme toggle
-
 📞 Extended Contact section with form
 
 💼 Perfect for resumes, client outreach, and freelancing
